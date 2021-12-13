@@ -1,21 +1,37 @@
-import { StatusBar } from 'expo-status-bar';
+import 'react-native-gesture-handler';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
+import { Header } from "react-native-elements";
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+import RestaurantFinder from './RestaurantFinder';
+import RestaurantInfo from './RestaurantInfo';
+import Favorites from './Favorites';
+
+const  Stack = createStackNavigator();
+
 
 export default function App() {
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+  
+    <NavigationContainer>
+
+      <Header
+        centerComponent={{ text: 'HELSINKI RESTAURANTS', style: { color: '#fff' } }}
+      />          
+
+      <Stack.Navigator>
+        <Stack.Screen name="Welcome" component={RestaurantFinder} />
+        <Stack.Screen name="Info" component={RestaurantInfo} />
+        <Stack.Screen name="Favorites" component={Favorites} />
+      </Stack.Navigator>
+    </NavigationContainer>
+    
   );
+
+  
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+
